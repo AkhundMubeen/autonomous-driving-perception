@@ -1,38 +1,24 @@
-# 🚗 Real-Time Road Scene Understanding for Autonomous Driving
+# Real-Time Road Scene Understanding for Autonomous Driving
 
-An end-to-end **Computer Vision** pipeline for autonomous driving that combines **Semantic Segmentation**, **Object Detection**, and **Multi-Object Tracking** into a unified real-time perception system.
+An end-to-end computer vision pipeline for autonomous driving that combines semantic segmentation, object detection, and multi-object tracking into a unified real-time perception system.
 
-The project was developed using the **BDD100K (Berkeley DeepDrive 100K)** dataset and leverages **U-Net++**, **YOLO11m**, and **ByteTrack** to understand complex road scenes from driving videos.
+The project is built using the **BDD100K** dataset and integrates **U-Net++**, **YOLO11m**, and **ByteTrack** for road scene understanding.
 
 ---
 
-## 📌 Project Overview
-
-Modern autonomous vehicles require multiple perception tasks to be performed simultaneously. Instead of relying on a single deep learning model, this project integrates multiple specialized models into one pipeline.
+## Project Overview
 
 The system performs:
 
-- 🛣 Semantic segmentation of road scenes
-- 🚘 Traffic object detection
-- 🎯 Persistent multi-object tracking
-- 🎥 Real-time video inference
-- 📊 Live FPS monitoring
+- Semantic segmentation of road scenes
+- Object detection
+- Multi-object tracking
+- Real-time video inference
+- FPS monitoring
 
 ---
 
-## 🎯 Features
-
-- Semantic Segmentation using **U-Net++ (EfficientNet-B3 Encoder)**
-- Object Detection using **YOLO11m**
-- Multi-Object Tracking using **ByteTrack**
-- Real-time video processing with OpenCV
-- Drivable road highlighting
-- Persistent object IDs across frames
-- FPS calculation and visualization
-
----
-
-# 🏗 Project Architecture
+## Architecture
 
 ```
                    Input Video
@@ -59,213 +45,134 @@ The system performs:
 
 ---
 
-# 📂 Repository Structure
+## Repository Structure
 
 ```
-├── detect-drive.py          # YOLO training pipeline
-├── segment-drive.py         # U-Net++ training pipeline
-├── Main.py                  # Complete inference pipeline
-├── yolo_best.pt             # Trained YOLO model
-├── unetpp_effb3.pth         # Trained segmentation model
-├── output_video.mp4         # Sample output
+├── detect-drive.py
+├── segment-drive.py
+├── Main.py
+├── yolo_best.pt
+├── unetpp_effb3.pth
+├── output_video.mp4
 ├── README.md
 ```
 
 ---
 
-# 📚 Dataset
+## Dataset
 
 This project uses the **BDD100K (Berkeley DeepDrive 100K)** autonomous driving dataset.
 
-The dataset contains:
-
-- Road scenes
-- Pixel-wise semantic labels
-- Object detection annotations
-- Diverse weather conditions
-- Day & Night driving
-- Urban and highway environments
-
-Website:
-
-https://bdd-data.berkeley.edu/
+Official Website: https://bdd-data.berkeley.edu/
 
 ---
 
-# 🧠 Models Used
+## Models
 
-## 1. Semantic Segmentation
+### Semantic Segmentation
 
-Model:
+| Component | Value |
+|----------|-------|
+| Model | U-Net++ |
+| Encoder | EfficientNet-B3 |
+| Framework | Segmentation Models PyTorch |
+| Classes | 19 |
+| Loss | Dice Loss + Cross Entropy Loss |
+| Optimizer | AdamW |
+| Metric | Mean IoU |
 
-- U-Net++
+### Object Detection
 
-Encoder:
-
-- EfficientNet-B3
-
-Framework:
-
-- Segmentation Models PyTorch
-
-Number of classes:
-
-- 19
-
-Loss Function:
-
-- Dice Loss
-- Cross Entropy Loss
-
-Optimizer:
-
-- AdamW
-
-Metric:
-
-- Mean IoU
+| Component | Value |
+|----------|-------|
+| Model | YOLO11m |
+| Framework | Ultralytics |
+| Classes | 10 |
+| Optimizer | AdamW |
+| Tracker | ByteTrack |
 
 ---
 
-## 2. Object Detection
+## Performance
 
-Model:
-
-- YOLO11m
-
-Framework:
-
-- Ultralytics
-
-Object Classes:
-
-- Bike
-- Bus
-- Car
-- Motor
-- Person
-- Rider
-- Traffic Light
-- Traffic Sign
-- Train
-- Truck
-
-Optimizer:
-
-- AdamW
-
-Tracking:
-
-- ByteTrack
-
----
-
-# 📈 Performance
-
-## Semantic Segmentation
+### Semantic Segmentation
 
 | Metric | Score |
-|---------|-------|
+|---------|------:|
 | Train mIoU | **61.17%** |
 | Validation mIoU | **50.20%** |
 
----
-
-## Object Detection
+### Object Detection
 
 | Metric | Score |
-|---------|-------|
+|---------|------:|
 | mAP@0.5 | **57.3%** |
 | mAP@0.5:0.95 | **32.8%** |
 
 ---
 
-# ⚙ Training Pipelines
+## Training Pipelines
 
-## Semantic Segmentation
-
-Implemented from scratch using PyTorch.
-
-Pipeline includes:
+### Semantic Segmentation
 
 - Dataset preparation
 - Data augmentation
-- Custom Dataset class
-- DataLoader
-- Dice + Cross Entropy Loss
-- Mean IoU evaluation
+- Custom PyTorch Dataset & DataLoader
+- Dice Loss + Cross Entropy Loss
 - Learning rate scheduling
-- Automatic checkpoint saving
+- Checkpoint saving
+- Mean IoU evaluation
+
+### Object Detection
+
+- BDD100K annotation parsing
+- YOLO annotation conversion
+- Automatic `dataset.yaml` generation
+- YOLO11m training
 
 ---
 
-## Object Detection
+## Inference Pipeline
 
-The detection pipeline performs:
+For every input frame, the system:
 
-- Parsing BDD100K annotations
-- Converting annotations into YOLO format
-- Dataset organization
-- Automatic generation of dataset.yaml
-- YOLO11m training using Ultralytics
-
----
-
-# 🎥 Inference Pipeline
-
-The inference pipeline performs the following operations for every frame:
-
-1. Read input frame
-2. Perform semantic segmentation
-3. Perform object detection
-4. Track detected objects using ByteTrack
-5. Overlay drivable road segmentation
-6. Draw tracked detections
-7. Compute FPS
-8. Save annotated frame
+1. Performs semantic segmentation.
+2. Detects traffic objects.
+3. Tracks objects using ByteTrack.
+4. Overlays the segmented road.
+5. Draws tracked detections.
+6. Computes FPS.
+7. Saves the annotated output video.
 
 ---
 
-# 🛠 Technologies Used
+## Technologies
 
 - Python
 - PyTorch
 - Segmentation Models PyTorch
 - Ultralytics YOLO11
 - OpenCV
-- NumPy
 - Albumentations
+- NumPy
 - ByteTrack
 - tqdm
-- BDD100K
 
 ---
 
-# 🚀 Installation
-
-Clone the repository
+## Installation
 
 ```bash
-git clone https://github.com/yourusername/your-repository-name.git
-```
+git clone https://github.com/AkhundMubeen/real-time-road-scene-understanding.git
 
-Move into the project
+cd real-time-road-scene-understanding
 
-```bash
-cd your-repository-name
-```
-
-Install dependencies
-
-```bash
 pip install -r requirements.txt
 ```
 
 ---
 
-# ▶ Usage
-
-Run the inference pipeline
+## Usage
 
 ```bash
 python Main.py
@@ -273,66 +180,47 @@ python Main.py
 
 ---
 
-# 📷 Results
+## Results
 
-## Input
+### Input
 
-*(Add an input frame screenshot here.)*
+*Add screenshot.*
 
----
+### Semantic Segmentation
 
-## Semantic Segmentation
+*Add screenshot.*
 
-*(Add segmentation result here.)*
+### Object Detection & Tracking
 
----
+*Add screenshot.*
 
-## Object Detection + Tracking
+### Final Output
 
-*(Add detection result here.)*
-
----
-
-## Final Output
-
-*(Add GIF or video preview here.)*
+*Add GIF or video preview.*
 
 ---
 
-# 🔮 Future Improvements
+## Future Work
 
-- Lane detection integration
+- Lane detection
 - Instance segmentation
 - Depth estimation
 - Traffic sign recognition
-- Driver behavior analysis
-- Sensor fusion with LiDAR
-- Model optimization for embedded devices
-- TensorRT deployment
-- ONNX export
-- Real-time edge deployment
+- Edge deployment (TensorRT / ONNX)
 
 ---
 
-# 📜 License
+## License
 
-This project is intended for educational and research purposes.
+This project is released for educational and research purposes.
 
 ---
 
-# 👨‍💻 Author
+## Author
 
 **Mubeen Akhund**
 
 Software Engineering Undergraduate  
 Mehran University of Engineering & Technology (MUET)
 
-GitHub:
-https://github.com/AkhundMubeen
-
-LinkedIn:
-(Add your LinkedIn profile)
-
----
-
-## ⭐ If you found this project helpful, consider giving it a star!
+GitHub: https://github.com/AkhundMubeen
