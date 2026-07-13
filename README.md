@@ -1,6 +1,10 @@
 ## Demo
 
-![Demo](main/output.gif)
+## Demo
+
+<p align="center">
+  <img src="output.gif" width="900">
+</p>
 
 # Real-Time Road Scene Understanding for Autonomous Driving
 
