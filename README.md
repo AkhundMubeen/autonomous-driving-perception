@@ -1,3 +1,7 @@
+## Demo
+
+![Demo](output.gif)
+
 # Real-Time Road Scene Understanding for Autonomous Driving
 
 An end-to-end computer vision pipeline for autonomous driving that combines semantic segmentation, object detection, and multi-object tracking into a unified real-time perception system.
@@ -142,14 +146,6 @@ pip install -r requirements.txt
 ```bash
 python Main.py
 ```
-
----
-
-## Results
-
-### Final Output
-
-*Add GIF or video preview.*
 
 ---
 
