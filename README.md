@@ -1,6 +1,6 @@
 ## Demo
 
-![Demo](output.gif)
+![Demo](main/output.gif)
 
 # Real-Time Road Scene Understanding for Autonomous Driving
 
