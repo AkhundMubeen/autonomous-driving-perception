@@ -1,7 +1,5 @@
 ## Demo
 
-## Demo
-
 <p align="center">
   <img src="output.gif" width="900">
 </p>
