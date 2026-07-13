@@ -1,0 +1,10 @@
+numpy
+opencv-python
+torch
+torchvision
+segmentation-models-pytorch
+albumentations
+ultralytics
+tqdm
+PyYAML
+ipython
