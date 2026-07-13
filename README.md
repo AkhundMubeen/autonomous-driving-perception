@@ -111,41 +111,6 @@ Official Website: https://bdd-data.berkeley.edu/
 
 ---
 
-## Training Pipelines
-
-### Semantic Segmentation
-
-- Dataset preparation
-- Data augmentation
-- Custom PyTorch Dataset & DataLoader
-- Dice Loss + Cross Entropy Loss
-- Learning rate scheduling
-- Checkpoint saving
-- Mean IoU evaluation
-
-### Object Detection
-
-- BDD100K annotation parsing
-- YOLO annotation conversion
-- Automatic `dataset.yaml` generation
-- YOLO11m training
-
----
-
-## Inference Pipeline
-
-For every input frame, the system:
-
-1. Performs semantic segmentation.
-2. Detects traffic objects.
-3. Tracks objects using ByteTrack.
-4. Overlays the segmented road.
-5. Draws tracked detections.
-6. Computes FPS.
-7. Saves the annotated output video.
-
----
-
 ## Technologies
 
 - Python
@@ -163,7 +128,7 @@ For every input frame, the system:
 ## Installation
 
 ```bash
-git clone https://github.com/AkhundMubeen/real-time-road-scene-understanding.git
+git clone https://github.com/AkhundMubeen/autonomous-driving-perception.git
 
 cd real-time-road-scene-understanding
 
@@ -182,18 +147,6 @@ python Main.py
 
 ## Results
 
-### Input
-
-*Add screenshot.*
-
-### Semantic Segmentation
-
-*Add screenshot.*
-
-### Object Detection & Tracking
-
-*Add screenshot.*
-
 ### Final Output
 
 *Add GIF or video preview.*
@@ -205,8 +158,6 @@ python Main.py
 - Lane detection
 - Instance segmentation
 - Depth estimation
-- Traffic sign recognition
-- Edge deployment (TensorRT / ONNX)
 
 ---
 
